@@ -15,37 +15,38 @@ class _WidgetBodyGastosState extends State<WidgetBodyGastos> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        GridView2(),
-        Container(
-          margin: EdgeInsets.only(
-              top: size.height * 0.02, bottom: size.height * 0.02),
-          height: size.height * 0.07,
-          width:double.infinity,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
+    return Container(
+      margin:
+          EdgeInsets.only(top: size.height * 0.02, bottom: size.height * 0.02),
+      height: size.height * 0.5,
+      decoration: const BoxDecoration(
+        color: Color(0xff17191F),
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      child: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Facturas del año",
+                  style: ETypes().styleSueldo,
+                ),
+                Text(
+                  "Total facturado hasta hoy: \$1500",
+                  style: ETypes().styleSueldo,
+                ),
+              ],
             ),
           ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8),
-                child: Text(
-                  "Facturas del año",
-                  style: ETypes().styleChangeName,
-                ),
-              ),
-              Text(
-                "Total facturado hasta hoy: \$1500",
-                style: ETypes().styleChangeName,
-              ),
-            ],
-          ),
-        ),
-      ],
+          GridView2(),
+        ],
+      ),
     );
   }
 }

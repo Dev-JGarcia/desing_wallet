@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
                         )),
-                    provider.cuerpoPantalla == "Facturas"
+                    provider.cuerpoPantalla == "Facturas" 
                         ? const WidgetBodyGastos()
                         : provider.cuerpoPantalla == "Home"
                             ? const SingleChildScrollView(
