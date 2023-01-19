@@ -6,7 +6,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String mes;
 
-  const CustomAppBar({Key? key, required this.height,required this.mes}) : super(key: key);
+  const CustomAppBar({Key? key, required this.height, required this.mes})
+      : super(key: key);
   @override
   Size get preferredSize => Size.fromHeight(height);
 
@@ -30,12 +31,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children:  [
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                padding: const EdgeInsets.all(0),
+                icon: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.white,
+                  size: 20,
+                )),
             Text(
               "Facturas de mes $mes",
               style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            const SizedBox(
+              width: 15,
             ),
           ],
         ),

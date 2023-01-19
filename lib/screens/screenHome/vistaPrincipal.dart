@@ -69,7 +69,7 @@ class _WidgetBodyHomePrincipalState extends State<WidgetBodyHomePrincipal> {
             ],
           ),
         ),
-        PieChartWidget()
+        const PieChartWidget()
       ],
     );
   }

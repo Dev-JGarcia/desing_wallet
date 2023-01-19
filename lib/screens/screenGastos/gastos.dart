@@ -18,7 +18,7 @@ class _WidgetBodyGastosState extends State<WidgetBodyGastos> {
     return Container(
       margin:
           EdgeInsets.only(top: size.height * 0.02, bottom: size.height * 0.02),
-      height: size.height * 0.5,
+      height: size.height * 0.55,
       decoration: const BoxDecoration(
         color: Color(0xff17191F),
         borderRadius: BorderRadius.all(

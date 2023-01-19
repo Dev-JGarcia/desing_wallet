@@ -22,11 +22,13 @@ class _MyCustomUIState extends State<MyCustomUI> with TickerProviderStateMixin {
   late Animation<double> _animation1;
   late Animation<double> _animation2;
   late Animation<double> _animation3;
-  TextEditingController textCampo1 = TextEditingController();
-  late TextEditingController textCampo2 = TextEditingController();
+  TextEditingController textCampo1 =
+      TextEditingController(text: UserPreferences.nombreSaved);
+  late TextEditingController textCampo2 =
+      TextEditingController(text: UserPreferences.sueldo);
 
   bool _bool = true;
-  late String imgPath = "";
+  String imgPath = UserPreferences.pathImag;
   @override
   void initState() {
     super.initState();

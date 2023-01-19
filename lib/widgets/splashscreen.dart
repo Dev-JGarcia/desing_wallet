@@ -87,7 +87,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
                 duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
-                  'OUR-Wallet',
+                  'FuckApp Control',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

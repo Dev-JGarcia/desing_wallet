@@ -188,7 +188,7 @@ class _WidgetBodyCuentaState extends State<WidgetBodyCuenta> {
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       "Datos actuales",
