@@ -1,21 +1,25 @@
 // ignore_for_file: file_names
 
+import 'package:desing_wallet/Services/model.dart';
+import 'package:desing_wallet/providers/provider.dart';
 import 'package:desing_wallet/screens/screenGastos/widgets/CustomAppBar.dart';
 import 'package:desing_wallet/screens/screenGastos/widgets/cuerpoList.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 import '../../Services/sharedpreferences.dart';
-import '../../Services/text_lengt.dart';
 import '../screenPrincipal/types.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool mesActivo;
   final String mes;
-  HomeScreen({Key? key, required this.mesActivo, required this.mes})
+  const HomeScreen(
+      {Key? key, required this.mesActivo, required this.mes})
       : super(key: key);
 
   @override
@@ -65,8 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
 // ! contenedor elevatedboton agregar
   Container containerAdd(Size size, BuildContext context) {
     return Container(
-      margin:
-          EdgeInsets.only(top: size.height * 0.02, bottom: size.height * 0.01),
+      margin: EdgeInsets.only(
+          top: size.height * 0.02, bottom: size.height * 0.01),
       //height: 100,
       width: size.width,
       padding: const EdgeInsets.all(8.0),
@@ -191,6 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _showDialog(BuildContext context) {
+    final db = Provider.of<ProviderApp>(context,listen: false);
     showCupertinoDialog(
         context: context,
         barrierDismissible: true,
@@ -212,8 +217,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary:
-                                  const Color(0xff141414).withOpacity(0.5)),
+                              primary: const Color(0xff141414)
+                                  .withOpacity(0.5)),
                           onPressed: () {
                             _selectFecha(context);
                           },
@@ -231,7 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 33,
                         child: TextField(
                           inputFormatters: [
-                            FilteringTextInputFormatter.singleLineFormatter
+                            FilteringTextInputFormatter
+                                .singleLineFormatter
                           ],
                           controller: controlador,
                           decoration: decorationInput(
@@ -251,8 +257,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                           keyboardType: TextInputType.phone,
                           controller: controladorC,
-                          decoration: decorationInput(
-                              "", const Icon(Icons.attach_money_rounded)),
+                          decoration: decorationInput("",
+                              const Icon(Icons.attach_money_rounded)),
                         ),
                       ),
                       const SizedBox(
@@ -273,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   CupertinoDialogAction(
                     child: const Text("Guardar"),
-                    onPressed: () {
+                    onPressed: () async {
                       if (controlador.text.isEmpty ||
                           controladorC.text.isEmpty ||
                           textFecha.text.isEmpty) {
@@ -281,9 +287,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             msg:
                                 "Información incompleta - Llene la informacion requerida");
                       } else {
-                        debugPrint(
-                            "${controlador.text} - ${controladorC.text}");
-                        Navigator.of(context).pop();
+                        var fec = textFecha.text.split('/');
+                        Factura fac = Factura(
+                          id: null,
+                            date: textFecha.text,
+                            month: fec[1],
+                            year: fec[0],
+                            descrip: controlador.text,
+                            monto: controladorC.text,
+                            sueldoActual: "20000");
+                        var i = await db.insertarFactura(fac);
+                        if (i == 1) {
+                          debugPrint(
+                              "${controlador.text} - ${controladorC.text}");
+                          Navigator.of(context).pop();
+                        } else {
+                          debugPrint("no se inserto");
+                        }
                       }
                     },
                   ),
